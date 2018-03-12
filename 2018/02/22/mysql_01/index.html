@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -79,15 +79,17 @@
 
 
 
-<meta name="description" content="人生不只生活的苟且,还有诗和远方">
-<meta property="og:type" content="website">
-<meta property="og:title" content="人生如歌">
-<meta property="og:url" content="https://luoxuguang.github.io/index.html">
+<meta name="description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入1skip-grant-tables=1 然后重启mysql1234[root@luo ~]# mysqlmysql&amp;gt; use mysq">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql 5.7 root密码重置(centos 7)">
+<meta property="og:url" content="https://luoxuguang.github.io/2018/02/22/mysql_01/index.html">
 <meta property="og:site_name" content="人生如歌">
-<meta property="og:description" content="人生不只生活的苟且,还有诗和远方">
+<meta property="og:description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入1skip-grant-tables=1 然后重启mysql1234[root@luo ~]# mysqlmysql&amp;gt; use mysq">
+<meta property="og:updated_time" content="2018-03-12T07:03:02.192Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="人生如歌">
-<meta name="twitter:description" content="人生不只生活的苟且,还有诗和远方">
+<meta name="twitter:title" content="Mysql 5.7 root密码重置(centos 7)">
+<meta name="twitter:description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入1skip-grant-tables=1 然后重启mysql1234[root@luo ~]# mysqlmysql&amp;gt; use mysq">
 
 
 
@@ -117,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://luoxuguang.github.io/"/>
+  <link rel="canonical" href="https://luoxuguang.github.io/2018/02/22/mysql_01/"/>
 
 
 
 
 
-  <title>人生如歌</title>
+  <title>Mysql 5.7 root密码重置(centos 7) | 人生如歌</title>
   
 
 
@@ -142,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -248,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/22/mysql_01/" itemprop="url">Mysql 5.7 root密码重置(centos 7)</a></h1>
+          <h1 class="post-title" itemprop="name headline">Mysql 5.7 root密码重置(centos 7)</h1>
         
 
         <div class="post-meta">
@@ -300,9 +299,7 @@
       
 
       
-        
-          
-            <p>mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。<br>输入以下命令可查询root用户的初始密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-&gt; grep password /var/log/mysqld.log</span><br></pre></td></tr></table></figure></p>
+        <p>mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。<br>输入以下命令可查询root用户的初始密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-&gt; grep password /var/log/mysqld.log</span><br></pre></td></tr></table></figure></p>
 <p>如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip-grant-tables=1</span><br></pre></td></tr></table></figure></p>
 <p>然后重启mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@luo ~]# mysql</span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">mysql&gt; update user set authentication_string = password(&quot;123456&quot;) where user=&quot;root&quot;;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure></p>
 <p>然后将/etc/my.cnf中的skip-grant-tables=1注释掉，重启mysql服务</p>
@@ -313,8 +310,6 @@
 <p>将mysql的密码安全等级降低之后，可以将root密码修改回来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; update user set authentication_string = password(&quot;&quot;) where user=&quot;root&quot;;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure></p>
 <p>以上密码root即清除为空了。使用mysql即可直接进入mysql,当然生产环境中不推荐此种做法</p>
 
-          
-        
       
     </div>
     
@@ -329,263 +324,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luoxuguang.github.io/2018/01/15/oc&swift/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="雒叙光">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人生如歌">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/15/oc&swift/" itemprop="url">OC与swift混编</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-15T18:00:00+08:00">
-                2018-01-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="OC工程调用swift文件"><a href="#OC工程调用swift文件" class="headerlink" title="OC工程调用swift文件"></a>OC工程调用swift文件</h3><ol>
-<li>新建swift文件时会提示创建bridge文件，例如这个格式的，MIXDemo-Bridging-Header.h，前面的是项目名称</li>
-<li><p>然后在Build Settings设置Porduct Module Name ,例如  MixDemo 引入#import “MixDemo-swift.h”</p>
-</li>
-<li><p>在Build Settings设置Defines Module 为Yes</p>
-</li>
-</ol>
-<h3 id="swift工程调用oc文件"><a href="#swift工程调用oc文件" class="headerlink" title="swift工程调用oc文件"></a>swift工程调用oc文件</h3><ul>
-<li>只需要在桥接文件如MIXDemo-Bridging-Header.h中导入.h文件即可</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luoxuguang.github.io/2018/01/14/firstBlog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="雒叙光">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人生如歌">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/14/firstBlog/" itemprop="url">人生的意义</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-14T16:20:00+08:00">
-                2018-01-14
-              </time>
+              <a href="/2018/01/15/oc&swift/" rel="next" title="OC与swift混编">
+                <i class="fa fa-chevron-left"></i> OC与swift混编
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>人生不只生活的苟且，还有诗和远方</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -595,10 +363,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -606,6 +375,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -626,8 +399,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -678,6 +460,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql密码难度修改"><span class="nav-number">1.</span> <span class="nav-text">mysql密码难度修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql-安全策略以及root密码清空"><span class="nav-number">2.</span> <span class="nav-text">mysql 安全策略以及root密码清空</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -811,6 +609,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
