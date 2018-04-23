@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入1skip-grant-tables=1 然后重启mysql1234[root@luo ~]# mysqlmysql&amp;gt; use mysq">
+<meta name="description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。 输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql 5.7 root密码重置(centos 7)">
 <meta property="og:url" content="https://luoxuguang.github.io/2018/02/22/mysql_01/index.html">
 <meta property="og:site_name" content="雒叙光个人博客">
-<meta property="og:description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入1skip-grant-tables=1 然后重启mysql1234[root@luo ~]# mysqlmysql&amp;gt; use mysq">
-<meta property="og:updated_time" content="2018-03-12T07:11:03.603Z">
+<meta property="og:description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。 输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入">
+<meta property="og:updated_time" content="2018-04-22T15:41:51.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql 5.7 root密码重置(centos 7)">
-<meta name="twitter:description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入1skip-grant-tables=1 然后重启mysql1234[root@luo ~]# mysqlmysql&amp;gt; use mysq">
+<meta name="twitter:description" content="mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。 输入以下命令可查询root用户的初始密码：1-&amp;gt; grep password /var/log/mysqld.log 如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入">
 
 
 
@@ -192,6 +192,14 @@
           <a href="/archives/" rel="section">
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+            关于
           </a>
         </li>
       
@@ -306,8 +314,9 @@
       
 
       
-        <p>mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。<br>输入以下命令可查询root用户的初始密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-&gt; grep password /var/log/mysqld.log</span><br></pre></td></tr></table></figure></p>
-<p>如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip-grant-tables=1</span><br></pre></td></tr></table></figure></p>
+        <p>mysql 5.7版本之后，安装以后启动时会进行随机密码的设定。</p>
+<p>输入以下命令可查询root用户的初始密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-&gt; grep password /var/log/mysqld.log</span><br></pre></td></tr></table></figure></p>
+<p>如果密码设置过之后又忘记了，可以在配置文件/etc/my.cnf中加入<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip-grant-tables=1</span><br></pre></td></tr></table></figure></p>
 <p>然后重启mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@luo ~]# mysql</span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">mysql&gt; update user set authentication_string = password(&quot;123456&quot;) where user=&quot;root&quot;;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure></p>
 <p>然后将/etc/my.cnf中的skip-grant-tables=1注释掉，重启mysql服务</p>
 <h2 id="mysql密码难度修改"><a href="#mysql密码难度修改" class="headerlink" title="mysql密码难度修改"></a>mysql密码难度修改</h2><p>mysql密码修改为123456之后，有人发现使用123456能进入mysql，但是却不能使用mysql的任何功能。会出现如下情况:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@luo ~]# mysql -uroot -p123456</span><br><span class="line">mysql: [Warning] Using a password on the command line interface can be insecure.</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 4</span><br><span class="line">Server version: 5.7.19</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.</span><br></pre></td></tr></table></figure></p>
