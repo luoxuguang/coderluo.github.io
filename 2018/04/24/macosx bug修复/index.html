@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Mac OSX," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="博主笔记本MacBookPro,系统MacOS10.13.3,偶然需要安装一款软件，系统竟然弹出对话框需要输入管理员账号和密码，咦，以前不都是只要密码，账户自动补充的吗？我也没多想， 输入了账号密码然后回车，弹框竟然抖动了一下没有消失，握草，点开了用户与群组，惊奇的发现我的账户">
+<meta name="keywords" content="Mac OSX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="震惊！MacOS系统出现了个很神奇的Bug">
+<meta property="og:url" content="https://luoxuguang.github.io/2018/04/24/macosx bug修复/index.html">
+<meta property="og:site_name" content="雒叙光个人博客">
+<meta property="og:description" content="博主笔记本MacBookPro,系统MacOS10.13.3,偶然需要安装一款软件，系统竟然弹出对话框需要输入管理员账号和密码，咦，以前不都是只要密码，账户自动补充的吗？我也没多想， 输入了账号密码然后回车，弹框竟然抖动了一下没有消失，握草，点开了用户与群组，惊奇的发现我的账户">
+<meta property="og:image" content="https://i0.wp.com/www.hxuesong.com/wp-content/uploads/2017/12/mac%E6%9D%83%E9%99%904.jpg?w=2400">
+<meta property="og:updated_time" content="2018-04-26T12:17:47.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="震惊！MacOS系统出现了个很神奇的Bug">
+<meta name="twitter:description" content="博主笔记本MacBookPro,系统MacOS10.13.3,偶然需要安装一款软件，系统竟然弹出对话框需要输入管理员账号和密码，咦，以前不都是只要密码，账户自动补充的吗？我也没多想， 输入了账号密码然后回车，弹框竟然抖动了一下没有消失，握草，点开了用户与群组，惊奇的发现我的账户">
+<meta name="twitter:image" content="https://i0.wp.com/www.hxuesong.com/wp-content/uploads/2017/12/mac%E6%9D%83%E9%99%904.jpg?w=2400">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"remove","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://luoxuguang.github.io/2018/04/24/macosx bug修复/"/>
+
+
+
+
+
+  <title>震惊！MacOS系统出现了个很神奇的Bug | 雒叙光个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雒叙光个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人生不只生活的苟且,还有诗和远方</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luoxuguang.github.io/2018/04/24/macosx bug修复/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="雒叙光">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雒叙光个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">震惊！MacOS系统出现了个很神奇的Bug</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-24T20:03:00+08:00">
+                2018-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/24/macosx bug修复/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/24/macosx bug修复/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>博主笔记本MacBookPro,系统MacOS10.13.3,偶然需要安装一款软件，系统竟然弹出对话框需要输入管理员账号和密码，咦，以前不都是只要密码，账户自动补充的吗？我也没多想， 输入了账号密码然后回车，弹框竟然抖动了一下没有消失，握草，点开了用户与群组，惊奇的发现我的账户<br><a id="more"></a><br>竟然变成了普通用户！！！💯</p>
+<p>惊愕之余，我竟然对它束手无策，因为我现在不是管理员了,对电脑失去了控制权,太可怕了!我又试了所有的可能，账号密码就是不对，没办法了，打开了万能的谷歌，找到了和我有相同遭遇的难兄难弟，而原因竟然是因为修改了账号导致管理员丢失了。。。我好想前几天确实改了账号~。~好吧，这Bug没谁了，废话不多说，贴下解决方法，希望可以帮助到有需要的人！<br>1.首先关闭电脑，拔掉所有外接线（充电线和网络线可保留），按住command+s（注意是一直按住不放，多按一段时间，我也是试了好多次才好）,接着重启电脑，然后就会就会进入一个很牛逼的黑框，类似于终端的，是有root权限的，如下图：<br><img src="https://i0.wp.com/www.hxuesong.com/wp-content/uploads/2017/12/mac%E6%9D%83%E9%99%904.jpg?w=2400" alt="avatar"><br>2.请依次输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/sbin/mount空格-uaw</span><br><span class="line"></span><br><span class="line">rm空格var/db/.applesetupdone</span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></p>
+<p>接着会自动运行，此操作目的为创建新的管理员帐户，接着会来到熟悉的画面，我们只需要按步骤创建一个新的管理员，把你原来那个用户设置为管理员，然后再把这个新创建的干掉就好了~~~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mac-OSX/" rel="tag"># Mac OSX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/22/mysql_01/" rel="next" title="Mysql 5.7 root密码重置(centos 7)">
+                <i class="fa fa-chevron-left"></i> Mysql 5.7 root密码重置(centos 7)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雒叙光</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://luoxuguang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://luoxuguang.github.io/2018/04/24/macosx bug修复/';
+          this.page.identifier = '2018/04/24/macosx bug修复/';
+          this.page.title = '震惊！MacOS系统出现了个很神奇的Bug';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://luoxuguang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=5.1.4"></script>
+
+
+</body>
+</html>
