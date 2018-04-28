@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Lance&#39;s Blog">
 <meta property="og:description" content="下面这个程序会打印出什么结果：1234567-(void)syncDemo&amp;#123;    NSLog(@&amp;quot;打印1&amp;quot;);    dispatch_sync(dispatch_get_main_queue(), ^&amp;#123;        NSLog(@&amp;quot;打印2&amp;quot;);    &amp;#125;);    NSLog(@&amp;quot;打印3&amp;quot;);  &amp;#1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-27T14:58:05.206Z">
+<meta property="og:updated_time" content="2018-04-28T03:46:13.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS知识点总结-GCD同步死锁">
 <meta name="twitter:description" content="下面这个程序会打印出什么结果：1234567-(void)syncDemo&amp;#123;    NSLog(@&amp;quot;打印1&amp;quot;);    dispatch_sync(dispatch_get_main_queue(), ^&amp;#123;        NSLog(@&amp;quot;打印2&amp;quot;);    &amp;#125;);    NSLog(@&amp;quot;打印3&amp;quot;);  &amp;#1">
@@ -324,12 +324,12 @@
 
       
         <p>下面这个程序会打印出什么结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(void)syncDemo&#123;</span><br><span class="line">    NSLog(@&quot;打印1&quot;);</span><br><span class="line">    dispatch_sync(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        NSLog(@&quot;打印2&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    NSLog(@&quot;打印3&quot;);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>结果是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-04-27 15:49:05.878072+0800 textDemo[726:286339] 打印1</span><br><span class="line">(lldb)</span><br></pre></td></tr></table></figure></p>
+<p>结果是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2017-03-24 15:49:05.878072+0800 textDemo[726:286339] 打印1</span><br><span class="line">(lldb)</span><br></pre></td></tr></table></figure></p>
 <p>并且有EXC_BAD_INSTRUCTION的报错信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread 1: EXC_BAD_INSTRUCTION (code=EXC_I386_INVOP, subcode=0x0)</span><br></pre></td></tr></table></figure></p>
 <p>我们来一起分析一下这个过程。首先打印1，然后调用dispatch_sync(dispatch_get_main_queue()同步方法。GCD同步方法中需要执行打印2。于是就产生了死锁。我们一起来分析一下GCD的同步方法机制。同步方法：1，同于当前线程要做的事。做完主线程的一件事，才能再做下一件事。2，以block方法中的是事情做完为结束。</p>
 <p>我们一起分析一下这个Demo的流程。首先打印1，然后调用sync方法。在主线程中，我需要执行sync方法。sync方法中有一个打印2的事情。也要在主线程去做。由于主线程同一时间只能做一件事。于是打印2需要等待sync方法完成再去执行。而sync同步方法的完成，需要等待block中的打印2完成。于是就形成了死锁。两个事件相互等待。</p>
 <p>解决方案。将sync同步方法，替换成异步方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">      NSLog(@&quot;打印2&quot;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
-<p>这样就可以看到正常打印了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2018-04-27 16:34:20.208022+0800 textDemo[19419:343315] 打印1</span><br><span class="line">2018-04-27 16:34:20.208206+0800 textDemo[19419:343315] 打印3</span><br><span class="line">2018-04-27 16:34:20.211819+0800 textDemo[19419:343315] 打印2</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以看到正常打印了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2017-03-24 16:34:20.208022+0800 textDemo[19419:343315] 打印1</span><br><span class="line">2017-03-24 16:34:20.208206+0800 textDemo[19419:343315] 打印3</span><br><span class="line">2017-03-24 16:34:20.211819+0800 textDemo[19419:343315] 打印2</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
